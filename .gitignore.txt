@@ -1,0 +1,4 @@
+!/AfterHourConsoleApplication/bin/Debug/WorkingHour.config
+!/AfterHourConsoleApplication/bin/Release/WorkingHour.config
+/AfterHourConsoleApplication/bin/
+/AfterHourConsoleApplication/obj/
