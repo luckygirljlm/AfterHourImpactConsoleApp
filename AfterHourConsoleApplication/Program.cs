@@ -37,7 +37,7 @@ namespace AfterHourConsoleApplication
             userLogin();
 
             UserConfig.getUserConfig();
-            if (!UserConfig.isUserConfigValid) {
+            if (!UserConfig.isUserConfigValid()) {
                 exit();
             }
             AfterHourImpactComputor.getAfterHourImpact();
@@ -92,16 +92,6 @@ namespace AfterHourConsoleApplication
 
             writeToFileWithPath(Utils.token + "\r\n" + DateTime.Now.AddMinutes(30).ToString(), Utils.tokenFile, Utils.filePath);
             //Utils.token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImVuaDlCSnJWUFU1aWpWMXFqWmpWLWZMMmJjbyJ9.eyJuYW1laWQiOiJmZTkzYmZlMS03OTQ3LTQ2MGEtYTVlMC03YTU5MDZiNTEzNjNANzJmOTg4YmYtODZmMS00MWFmLTkxYWItMmQ3Y2QwMTFkYjQ3IiwidmVyIjoiRXhjaGFuZ2UuQ2FsbGJhY2suVjEiLCJhcHBjdHhzZW5kZXIiOiJodHRwczovL2FnYXZlY2RuLm8zNjV3ZXZlLWRldi5jb20vQXBwUmVhZC9Ib21lL0hvbWUtZGV2Lmh0bWwiLCJhcHBjdHgiOiJ7XCJvaWRcIjpcImI4N2FhYzEwLTQzZjgtNGNmMy1hY2FmLWVkNWUyZmE2ZmVhNFwiLFwicHVpZFwiOlwiMTAwMzdGRkU5Njc5QUYyRFwiLFwic210cFwiOlwibGltamlAbWljcm9zb2Z0LmNvbVwiLFwidXBuXCI6XCJsaW1qaUBtaWNyb3NvZnQuY29tXCIsXCJtc2V4Y2hwcm90XCI6XCJld3NcIn0iLCJpc3MiOiIwMDAwMDAwMi0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDBANzJmOTg4YmYtODZmMS00MWFmLTkxYWItMmQ3Y2QwMTFkYjQ3IiwiYXVkIjoiMDAwMDAwMDItMDAwMC0wZmYxLWNlMDAtMDAwMDAwMDAwMDAwL291dGxvb2sub2ZmaWNlMzY1LmNvbUA3MmY5ODhiZi04NmYxLTQxYWYtOTFhYi0yZDdjZDAxMWRiNDciLCJleHAiOjE1MDAwNTk0NzksIm5iZiI6MTUwMDAzMDY3OX0.aZyTkR0EJ6ynBAlok__wHNTgq9hryY4JNnHIBfAfi5vBo8A648Jwbd6KINr_fKX5b3Xvy5sP78rM4tdr0ULHgxBQJtlO07kFF8VDEz72BlP5XR2NoqTLEbAF_eMUrLPNRMeXLawmLfQ2UQNekGUJBZgkuI5kDsBUL8PnHcsT2sKP162eLjH8I-TZgo4_oly86GwmTMG2vO0h1Mee8XkdjyrZpna4y_Ixemz7pmhJ63bO1NC2eQZkB0NPv6pk3aawz76L6O5lwzuKgIAGolnP1B76ZlsbDiIOClFsKImszRctZROgTc0dM7d1I1DxUuQiRDiczGjEVpAayLBK4Ixx4w";
-
-            /*ExchangeService exchangeService = new ExchangeService(ExchangeVersion.Exchange2013);
-            exchangeService.Credentials = new OAuthCredentials(authenticationResult.AccessToken);
-            exchangeService.Url = new Uri(serverName + "/ews/exchange.asmx");
-
-            exchangeService.TraceEnabled = true;
-            exchangeService.TraceFlags = TraceFlags.All;
-
-            ExecuteRequest(authenticationResult.AccessToken, new FindUserSentItemsRequest());*/
-
         }
 
         public static void writeToFileWithPath(string content, string fileName, string path)
@@ -140,7 +130,7 @@ namespace AfterHourConsoleApplication
                     try
                     {
                         var days = Convert.ToInt32(args[i + 1]);
-                        if (days > 0 && days <= 30)
+                        if (days > 0 && days <= 60)
                         {
                             Utils.startRange = Utils.generatePriorDayBreak(days);
                             Utils.days = days;

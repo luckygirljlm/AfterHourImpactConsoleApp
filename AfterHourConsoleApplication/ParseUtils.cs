@@ -207,11 +207,6 @@ namespace AfterHourConsoleApplication
 
                 string itemClass = getXMLElementTextContentOrEmpty(messages.Item(i), "t:ItemClass");
 
-                //if (itemClass == "IPM.Note.Rules.OofTemplate.Microsoft")  //auto reply
-                //{
-                //    continue;
-                //}
-
                 //TODO: Meeting response ?????
                 if(itemClass != "IPM.Note" && itemClass != "IPM.Schedule.Meeting.Request")
                 {

@@ -21,7 +21,15 @@ namespace AfterHourConsoleApplication
 {
     static class UserConfig
     {
-        public static bool isUserConfigValid = true;
+        private static bool _isUserConfigValid = true;
+        private static SDK.WorkingHours chinaConfig = null;
+        private static SDK.WorkingHours usaConfig = null;
+
+        public static bool isUserConfigValid()
+        {
+            return _isUserConfigValid;
+        }
+
         public static void getUserConfig()
         {
             string userConfigurationResponse = AfterHourImpactComputor.ExecuteRequest(new GetUserConfigurationRequest(), "UserConfiguration", false);
@@ -47,11 +55,11 @@ namespace AfterHourConsoleApplication
 
                 if (Objects.ContainsKey("chinaconfig"))
                 {
-                    Utils.chinaConfig = parseWorkingHour(Objects["chinaconfig"], Utils.defaultWorkingHours);
+                    UserConfig.chinaConfig = parseWorkingHour(Objects["chinaconfig"], Utils.defaultWorkingHours);
                 }
                 if (Objects.ContainsKey("redmondconfig"))
                 {
-                    Utils.usaConfig = parseWorkingHour(Objects["redmondconfig"], Utils.defaultWorkingHours);
+                    UserConfig.usaConfig = parseWorkingHour(Objects["redmondconfig"], Utils.defaultWorkingHours);
                 }
                 if (Objects.ContainsKey("chinamembers"))
                 {
@@ -83,7 +91,7 @@ namespace AfterHourConsoleApplication
                // printLog();
             }
             catch (Exception ex) {
-                isUserConfigValid = false;
+                _isUserConfigValid = false;
                 Console.WriteLine(ex.ToString());
             }
         }
@@ -120,8 +128,7 @@ namespace AfterHourConsoleApplication
         {
             for (var i = 0; i < nameList.Count; i++)
             {
-                Utils.receipientsConfig[nameList[i].ToString()] = isChina ? Utils.chinaConfig : Utils.usaConfig;
-                //Utils.receipientsConfig.Add(nameList[i].ToString(), isChina ? Utils.chinaConfig : Utils.usaConfig);
+                Utils.receipientsConfig[nameList[i].ToString()] = isChina ? UserConfig.chinaConfig : UserConfig.usaConfig;
             }
         }
 
@@ -196,7 +203,7 @@ namespace AfterHourConsoleApplication
 
             }
             if (!isValid) {
-                isUserConfigValid = false;
+                _isUserConfigValid = false;
                 Console.WriteLine("Error when parsing WorkingHour in config file...Please check the file...\n\n");
                 Console.WriteLine("Here is the error setting:");
                 foreach (var text in values) {

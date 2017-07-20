@@ -11,8 +11,6 @@ namespace AfterHourConsoleApplication
     static class Utils
     {
         public static SDK.WorkingHours userWorkingHourConfig = null;  //in user's timezone
-        public static SDK.WorkingHours chinaConfig = null;
-        public static SDK.WorkingHours usaConfig = null;
         public static Dictionary<string, SDK.WorkingHours> receipientsConfig = new Dictionary<string, SDK.WorkingHours>();
         public static bool shouldStartConv = false;
         public static bool shouldDirectReply = false;
@@ -27,7 +25,6 @@ namespace AfterHourConsoleApplication
         public static string token = "";
         public static string senderName = "";
         public static DateTime startRange = generatePriorDayBreak(7);
-        public static DateTime endRange = generateCurrentDayBreak();
         public static int days = 7;
         public static string lastServeralDaysText = " during last 7 days.";
         public static string filePath = "./AfterHourReports/";

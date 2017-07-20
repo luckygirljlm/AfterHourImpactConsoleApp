@@ -292,7 +292,7 @@ namespace AfterHourConsoleApplication
                         break;
                 }
                 
-                result.RemoveAt(i);
+                result.RemoveAt(0);
                 
             }
             return result;
